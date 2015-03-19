@@ -1,1 +1,3 @@
-cheerwe-js
+## CheerweJS
+
+一款基于bootstrap2.0风格的前端组件，力求让开发者使用最少的代码，完成预定义的功能需求
