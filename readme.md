@@ -5,8 +5,10 @@ CheerweJS是一款基于bootstrap2.0风格的前端组件，力求让开发者�
 
 说明
 --------------------------
+
 ### 目录结构说明
-    组件包含以下目录：
+
+组件包含以下目录：
 
 * js:存放组件的JS源文件
 * css:存放组件的样式源文件
@@ -16,15 +18,15 @@ CheerweJS是一款基于bootstrap2.0风格的前端组件，力求让开发者�
 --------------------------
 
 * Ajax
-*AutoComplete
-*Component
-*DatePicker
-*Dialog
-*Form
-*Grid
-*Mask
-*Message
-*NumberEditor
-*Pagebar
-*Select
-*Tabs
+* AutoComplete
+* Component
+* DatePicker
+* Dialog
+* Form
+* Grid
+* Mask
+* Message
+* NumberEditor
+* Pagebar
+* Select
+* Tabs
