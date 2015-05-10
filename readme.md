@@ -8,16 +8,19 @@ CheerweJS是一款基于bootstrap2.0风格的前端组件，力求让开发者�
 
 ### 目录结构说明
 
-组件包含以下目录：
+1. 组件包含以下目录：
 
 * js:存放组件的JS源文件
 * css:存放组件的样式源文件
 * lib:存放组件依赖的第三方组件库，例如jquery,bootstrap-2.0.0,my97datepicker,umeditor-1.2.2等
 
+2. 组件说明
+本框架依赖一个核心的core，核心core可以单独使用，不依赖于任何其他的第三方库，核心core主题提供各类公共的帮助方法，提供所有组件的积累$we.Object
 
 组件列表
 --------------------------
 
+* Core
 * Ajax
 * AutoComplete
 * Component
