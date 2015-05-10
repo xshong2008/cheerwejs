@@ -13,16 +13,16 @@ CheerweJS是一款基于bootstrap2.0风格的前端组件，力求让开发者�
 
 ## 组件列表
 --------------------------
-    *   Ajax
-    *AutoComplete
-    *Component
-    *DatePicker
-    *Dialog
-    *Form
-    *Grid
-    *Mask
-    *Message
-    *NumberEditor
-    *Pagebar
-    *Select
-    *Tabs
+*   Ajax
+*AutoComplete
+*Component
+*DatePicker
+*Dialog
+*Form
+*Grid
+*Mask
+*Message
+*NumberEditor
+*Pagebar
+*Select
+*Tabs
