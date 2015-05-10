@@ -40,7 +40,7 @@
 			el.animate({
 				'top': 50
 			});
-			
+
 			setTimeout(function() {
 				$we.msg.hide();
 			}, 3000);
@@ -65,4 +65,6 @@
 			this.show(msg, 'error');
 		}
 	});
+
+	$we.Msg = $we.msg;
 })(wejs, jQuery);

@@ -6,13 +6,16 @@
 			'</button>'
 		].join(''),
 		DR_INPUT = '[data-role="input"]',
-		DR_BTN = '[data-role="btn"]',
-		selector = '[data-role="wejs-date-picker"]';
+		DR_BTN = '[data-role="btn"]';
 
 	var getDateVal = function(val, format) {
-		if (val == 'now') {
-			format = format || 'yyyy-MM-dd';
-			val = $we.date.format((new Date()), format);
+		format = format || 'yyyy-MM-dd';
+		if (val && val.indexOf('now') == 0) {
+			val = (val.replace('now', '') || '0') - 0;
+			val = val * 24 * 3600 * 1000;
+			val = (new Date()).getTime() + val;
+			val = new Date(val);
+			val = $we.Date.format(val, format);
 		}
 		return val
 	};
@@ -36,10 +39,17 @@
 			var val = this.getValue();
 			this.fire('change', val);
 			if (this.minGear) {
-				$we.get(this.minGear).setMin(val);
+				var minGear = $we.get(this.minGear);
+				if (minGear) {
+					minGear.setMin(val);
+					minGear.showSelector();
+				}
 			}
 			if (this.maxGear) {
-				$we.get(this.maxGear).setMax(val);
+				var maxGear = $we.get(this.maxGear);
+				if (maxGear) {
+					maxGear.setMax(val);
+				}
 			}
 		},
 		_doShowCalendar: function() {
@@ -62,7 +72,9 @@
 
 			WdatePicker(config);
 		},
-
+		showSelector: function() {
+			this._doShowCalendar();
+		},
 		setInputSize: function(inputSize) {
 			var el = this.getInputEl();
 			el.removeClass('input-' + this.inputSize);
@@ -123,19 +135,17 @@
 		}
 	});
 
-
-	$(function() {
-		$we.autoRender(selector, $we.DatePicker, {
-			min: 'string',
-			max: 'string',
-			minGear: 'string',
-			maxGear: 'string',
-			name: 'string',
-			placeHolder: 'string',
-			value: 'string',
-			inputSize: 'string',
-			format: 'string',
-			events: ['change']
-		});
+	var selector = '[data-role="wejs-date-picker"]';
+	$we.autoRender(selector, $we.DatePicker, {
+		min: 'string',
+		max: 'string',
+		minGear: 'string',
+		maxGear: 'string',
+		name: 'string',
+		placeHolder: 'string',
+		value: 'string',
+		inputSize: 'string',
+		format: 'string',
+		events: ['change']
 	});
 })();

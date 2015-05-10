@@ -34,7 +34,7 @@
 						data.handler.call(data.scope, e);
 					});
 				} else {
-					this.el.on(e, fn);
+					this.el.on(name, fn);
 				}
 			}
 		},
@@ -79,6 +79,12 @@
 				}
 			}
 		},
+		show: function() {
+			this.el.show();
+		},
+		hide: function() {
+			this.el.hide();
+		},
 		doInit: function() {
 			if (!this.el) {
 				this.el = $('<div></div>');
@@ -88,7 +94,7 @@
 			this.id = (this.id || this.el.attr('id')) || $we.createId();
 
 			this.el
-				.attr('id', this.id)
+				.attr('__weid', this.id)
 				.addClass(this.cls);
 
 			this.__doInitEvents();
@@ -100,6 +106,7 @@
 
 	var extendFn = function(superclazz) {
 		return function(extension) {
+			//合并events
 			var events = [].concat(extension.events || [], superclazz.prototype.events);
 			extension.events = events;
 			var clazz = $we.extend(superclazz, extension);
@@ -121,16 +128,24 @@
 
 	var getAttrData = function(type, value) {
 		var vv = value;
+
+		//默认统一先按照方法执行
 		try {
 			switch (type) {
-				case 'function':
-					value = eval(value);
+				case 'function': //这两种类型在第一次的try就会被执行成功
+					// value = eval(value);
 					break;
 				case 'number':
 					value -= 0;
 					break;
-				case 'object':
-					value = eval(value);
+				case 'object': //这两种类型在第一次的try就会被执行成功
+					// value = eval(value);
+					break;
+				case 'bool':
+					value = value === 'true' ? true : false;
+					break;
+				case 'boolean':
+					value = value === 'true' ? true : false;
 					break;
 				default:
 					value = value;
@@ -142,7 +157,6 @@
 		}
 		return vv;
 	};
-
 	var getListeners = function(el, events) {
 		var attributes = el.attributes,
 			listeners = {};
@@ -180,14 +194,48 @@
 		return data;
 	};
 
-	$we.autoRender = function(selector, Clazz, attrs) {
+	var _autoRender = function(selector, Clazz, attrs, autoRender) {
 		$(selector).each(function() {
-			var config = getAttrs(this, attrs);
-			config.el = $(this);
+			var config = getAttrs(this, attrs),
+				el = $(this),
+				__weid = el.attr('__weid');
+
+			config.el = el;
 			config.id = this.id;
-			var ins = new Clazz(config);
-			ins.render();
-			ins.set(config);
+
+			if (!__weid) { //已经渲染过的，不再渲染
+				var ins = new Clazz(config);
+				autoRender = autoRender === false ? false : true;
+				if (autoRender) {
+					ins.render();
+				}
+				ins.set(config);
+			}
 		});
 	};
+
+	var autoList = [];
+	$we.autoRender = function(selector, Clazz, attrs, autoRender) {
+		var argLen = arguments.length;
+
+		if (argLen == 0) {
+			for (var i = 0, len = autoList.length; i < len; i++) {
+				autoList[i].autoRender();
+			}
+		} else if (argLen == 3 || argLen == 4) {
+			//给每个累添加autoRender方法，支持传入selector
+			Clazz.autoRender = (function(selector, Clazz, attrs, autoRender) {
+				return function(cuSelector) {
+					_autoRender(cuSelector || selector, Clazz, attrs, autoRender);
+				}
+			})(selector, Clazz, attrs, autoRender);
+
+			autoList.push(Clazz);
+		}
+	};
+
+
+	$(function() {
+		$we.autoRender();
+	});
 })(wejs, jQuery);

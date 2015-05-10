@@ -3,6 +3,7 @@
 		config = $.extend({}, {
 			dataType: 'json',
 			method: 'POST',
+			onComplete: function() {},
 			onSuccess: function() {},
 			onFail: function(ret) {
 				$we.msg.error(ret.msg);
@@ -14,9 +15,11 @@
 				} else {
 					this.onFail.call(this.scope || this, ret);
 				}
+				this.onComplete.call(this.scope || this, ret);
 			},
 			error: function(ret) {
 				this.onError.call(this.scope || this, ret);
+				this.onComplete.call(this.scope || this, ret);
 			}
 		}, config);
 

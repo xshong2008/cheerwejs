@@ -9,7 +9,7 @@
 		minGear: null,
 		maxGear: null,
 		cls: 'input-prepend input-append',
-		inputSize: 'mini', //mini small medium large xlarge xxlarge
+		inputSize: 'medium', //mini small medium large xlarge xxlarge
 		inputAlign: 'center',
 		name: '',
 		value: 0,
@@ -147,21 +147,20 @@
 
 			this.set({
 				value: this.value,
-				inputAlign: this.inputAlign
+				inputAlign: this.inputAlign,
+				inputSize: this.inputSize
 			});
 		}
 	});
 
 	var selector = '[data-role="wejs-number-editor"]';
-	$(function() {
-		$we.autoRender(selector, $we.NumberEditor, {
-			name: 'string',
-			inputSize: 'string',
-			min: 'number',
-			value: 'string',
-			minGear: 'string',
-			maxGear: 'string',
-			events: ['change']
-		});
+	$we.autoRender(selector, $we.NumberEditor, {
+		name: 'string',
+		inputSize: 'string',
+		min: 'number',
+		value: 'string',
+		minGear: 'string',
+		maxGear: 'string',
+		events: ['change']
 	});
 })();
