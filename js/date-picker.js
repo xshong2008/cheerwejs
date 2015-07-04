@@ -29,7 +29,7 @@
 		name: '',
 		placeHolder: '',
 		inputSize: 'medium',
-		cls: 'input-append',
+		cls: 'wejs-datepicker input-append',
 		events: [{
 			event: 'click',
 			selector: DR_BTN,

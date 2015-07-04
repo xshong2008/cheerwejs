@@ -1,0 +1,53 @@
+/*遮罩*/
+.wejs-mask {
+    background-color: #aaa;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000;
+}
+
+.wejs-mask-loading {
+    background-image: url("../images/loading.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/*dialog弹窗对话框*/
+.we-dialog .we-dialog-confirm,.we-dialog .we-dialog-alert{
+    font-size: 14px;
+    padding: 0 50px;
+}
+.we-dialog .we-dialog-confirm .we-icon,.we-dialog .we-dialog-alert .we-icon{
+    vertical-align: -24px;
+    margin-right: 15px;
+}
+.we-dialog .we-dialog-confirm .content,.we-dialog .we-dialog-alert .content{
+    display: inline-block;
+    width: 350px;
+}
+
+
+/*图标*/
+.we-icon{
+    height: 64px;
+    width: 64px;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.we-icon.we-icon-help{
+    background-image: url("../images/help.png");
+}
+.we-icon.we-icon-alert{
+    background-image: url("../images/alert.png");
+}
+.we-icon.we-icon-error{
+    background-image: url("../images/error.png");
+}
+.we-icon.we-icon-info{
+    background-image: url("../images/info.png");
+}
